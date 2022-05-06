@@ -5,8 +5,6 @@ layout: post
 
 Problems about dynamic programming (dp) on leetcode.
 
-## dynamic programming
-
 #### [5.Longest Palindromic Substring](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
 1. dp table and the meaning of subscript -- $dp[i][j]=true$ i.i.f the substring $[i,j]$ is palindromic
