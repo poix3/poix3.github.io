@@ -1,0 +1,26 @@
+title: Life in the Woods
+author:
+  name: Fengmao Wang
+  email: wangfm2020@gmail.com
+description: > # this means to ignore newlines until "show_excerpts:"
+  “So we beat on, boats against the current, borne back ceaselessly into the past.”
+
+show_excerpts: true # set to true to show excerpts on the homepage
+
+# Minima date format
+# refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
+minima:
+  date_format: "%b %-d, %Y"
+
+  # generate social links in footer
+  social_links:
+    github:  poix3
+    linkedin: wangfm
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.md
+
+# Build settings
+theme: minima
