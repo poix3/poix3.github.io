@@ -3,21 +3,22 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Life in the Woods | “So we beat on, boats against the current, borne back ceaselessly into the past.”</title>
+<title>Transformer Study Notes | Life in the Woods</title>
 <meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="Life in the Woods" />
+<meta property="og:title" content="Transformer Study Notes" />
 <meta name="author" content="Fengmao Wang" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="“So we beat on, boats against the current, borne back ceaselessly into the past.”" />
-<meta property="og:description" content="“So we beat on, boats against the current, borne back ceaselessly into the past.”" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<meta name="description" content="Useful links:" />
+<meta property="og:description" content="Useful links:" />
+<link rel="canonical" href="http://localhost:4000/2022/05/12/transformer-study-notes.html" />
+<meta property="og:url" content="http://localhost:4000/2022/05/12/transformer-study-notes.html" />
 <meta property="og:site_name" content="Life in the Woods" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-12T00:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Life in the Woods" />
+<meta property="twitter:title" content="Transformer Study Notes" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Fengmao Wang"},"description":"“So we beat on, boats against the current, borne back ceaselessly into the past.”","headline":"Life in the Woods","name":"Life in the Woods","url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fengmao Wang"},"dateModified":"2022-05-12T00:00:00+02:00","datePublished":"2022-05-12T00:00:00+02:00","description":"Useful links:","headline":"Transformer Study Notes","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022/05/12/transformer-study-notes.html"},"url":"http://localhost:4000/2022/05/12/transformer-study-notes.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Life in the Woods" />
 </head>
@@ -38,34 +39,44 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Transformer Study Notes</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2022-05-12T00:00:00+02:00" itemprop="datePublished">
+        May 12, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Useful links:</p>
+
+<ul>
+  <li><a href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</li>
+  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer lecture video</a> by <a href="https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ">Hung-yi Lee</a></li>
+</ul>
+
+<h3 id="1-introduction">1. Introduction</h3>
+
+<p>Recurrent models 的特征：</p>
+
+<ul>
+  <li>factor computation along the symbol positions</li>
+  <li>align the positions to steps in computation time ($h_{t-1}\rightarrow h_t$)</li>
+  <li>preclude parallelization within training examples (sequential computation)</li>
+</ul>
+
+<p>Attention mechanism 的特征：</p>
+
+<ul>
+  <li>allow modeling of dependencies without regard to their distance in the input or output sequences</li>
+</ul>
+
+<h3 id="2-background">2. Background</h3>
 
 
-
-  <ul class="post-list"><li>
-        <span class="post-meta">May 12, 2022</span>
-        <h3>
-          <a class="post-link" href="/2022/05/12/transformer-study-notes.html">
-            Transformer Study Notes
-          </a>
-        </h3><p>Useful links:</p>
-</li><li>
-        <span class="post-meta">May 6, 2022</span>
-        <h3>
-          <a class="post-link" href="/2022/05/06/dynamic-programming.html">
-            Dynamic Programming
-          </a>
-        </h3><p>Problems about dynamic programming (dp) on leetcode.</p>
-</li><li>
-        <span class="post-meta">May 5, 2022</span>
-        <h3>
-          <a class="post-link" href="/2022/05/05/welcome-to-jekyll.html">
-            Welcome To Jekyll
-          </a>
-        </h3><p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
-</li></ul>
-
-    </div>
+  </div><a class="u-url" href="/2022/05/12/transformer-study-notes.html" hidden></a>
+</article>
 
       </div>
     </main><footer class="site-footer h-card">
