@@ -8,8 +8,8 @@
 <meta property="og:title" content="Transformer Study Notes" />
 <meta name="author" content="Fengmao Wang" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Useful links:" />
-<meta property="og:description" content="Useful links:" />
+<meta name="description" content="“Attention is all you need.”" />
+<meta property="og:description" content="“Attention is all you need.”" />
 <link rel="canonical" href="http://localhost:4000/2022/05/12/transformer-study-notes.html" />
 <meta property="og:url" content="http://localhost:4000/2022/05/12/transformer-study-notes.html" />
 <meta property="og:site_name" content="Life in the Woods" />
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Transformer Study Notes" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fengmao Wang"},"dateModified":"2022-05-12T00:00:00+02:00","datePublished":"2022-05-12T00:00:00+02:00","description":"Useful links:","headline":"Transformer Study Notes","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022/05/12/transformer-study-notes.html"},"url":"http://localhost:4000/2022/05/12/transformer-study-notes.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fengmao Wang"},"dateModified":"2022-05-12T00:00:00+02:00","datePublished":"2022-05-12T00:00:00+02:00","description":"“Attention is all you need.”","headline":"Transformer Study Notes","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022/05/12/transformer-study-notes.html"},"url":"http://localhost:4000/2022/05/12/transformer-study-notes.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Life in the Woods" />
 </head>
@@ -49,16 +49,17 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Useful links:</p>
+    <p>“Attention is all you need.”</p>
 
 <ul>
   <li><a href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</li>
-  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer lecture video</a> by <a href="https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ">Hung-yi Lee</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1pu411o7BE">Transformer论文逐段精读</a></li>
+  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer, Hung-yi Lee</a></li>
 </ul>
 
 <h3 id="1-introduction">1. Introduction</h3>
 
-<p>Recurrent models 的特征：</p>
+<p>Recurrent models：</p>
 
 <ul>
   <li>factor computation along the symbol positions</li>
@@ -66,13 +67,59 @@
   <li>preclude parallelization within training examples (sequential computation)</li>
 </ul>
 
-<p>Attention mechanism 的特征：</p>
+<p>Attention mechanism：</p>
 
 <ul>
   <li>allow modeling of dependencies without regard to their distance in the input or output sequences</li>
 </ul>
 
 <h3 id="2-background">2. Background</h3>
+
+<p>ConvS2S and ByteNet are difficult to learn dependencies between distant positions and the number of operations grows required to relate signals from two arbitrary input or output positions grows in the distance between positions, linearly and logarithmically respectively.</p>
+
+<p>CNN代替RNN、但使用卷积很难对长的序列进行建模：很多层卷积才能将隔得比较远的位置关联起来。而卷积能一层就把整个序列”看到“。</p>
+
+<p>In the Transformer this is reduced to a constant number of operations. Multi-head attention is used to simulate the multi-channel output of CNN.</p>
+
+<p>但卷积能输出多个通道（不同的特征、模式etc.），所以用多头注意力来模拟。</p>
+
+<h3 id="3-model-architecture">3. Model Architecture</h3>
+
+<p><img src="/pic/transformer.png" style="zoom:50%;" /></p>
+
+<p>Encoder maps an input sequence of symbol representations (x1,…,xn) to a sequence of continuous representations z = (z1,…,zn)</p>
+
+<ul>
+  <li>where $z_t$ is the vector form of $x_t$</li>
+</ul>
+
+<p>Decoder then generates an output sequence (y1, …, ym)</p>
+
+<ul>
+  <li>auto-regressive: 解码器中词是一个一个生成的，且“输入又是输出”
+    <ul>
+      <li>prevent positions from attending to subsequent positions</li>
+      <li>因为在注意力机制中能看到<strong>整个</strong>句子，为了避免t时间能看到t时间以后的输入， 所以采用了masked多头注意力</li>
+      <li>保证训练和预测的行为一致</li>
+    </ul>
+  </li>
+  <li><strong>NB:</strong> m!=n</li>
+</ul>
+
+<p>Layer normalization 对每一个<strong>样本</strong>做normalization，</p>
+
+<ul>
+  <li>全局的均值方差对不定长的句子（比如比训练句更长的测试句）来讲效果不是特别好，所以不用BN</li>
+</ul>
+
+<p><img src="/pic/layer_normalization.png" style="zoom:35%;" /></p>
+
+<p>Scaled Dot-Product Attention</p>
+
+<ul>
+  <li>“scaled”: <a href="https://blog.csdn.net/qq_37430422/article/details/105042303">为什么 dot-product attention 需要被 scaled？</a> “We suspect that for large values of d_k, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients”</li>
+  <li>矩阵乘法利好并行</li>
+</ul>
 
 
   </div><a class="u-url" href="/2022/05/12/transformer-study-notes.html" hidden></a>

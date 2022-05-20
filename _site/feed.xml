@@ -1,5 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-15T17:27:08+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Life in the Woods</title><subtitle>“So we beat on, boats against the current, borne back ceaselessly into the past.”
-</subtitle><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><entry><title type="html">Knapsack Problem</title><link href="http://localhost:4000/2022/05/15/knapsack-problem.html" rel="alternate" type="text/html" title="Knapsack Problem" /><published>2022-05-15T00:00:00+02:00</published><updated>2022-05-15T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/15/knapsack-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/15/knapsack-problem.html"><![CDATA[<p>Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-20T22:06:12+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Life in the Woods</title><subtitle>“So we beat on, boats against the current, borne back ceaselessly into the past.”
+</subtitle><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><entry><title type="html">Stock Problem</title><link href="http://localhost:4000/2022/05/20/stock-problem.html" rel="alternate" type="text/html" title="Stock Problem" /><published>2022-05-20T00:00:00+02:00</published><updated>2022-05-20T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/20/stock-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/20/stock-problem.html"><![CDATA[]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tree</title><link href="http://localhost:4000/2022/05/18/tree.html" rel="alternate" type="text/html" title="Tree" /><published>2022-05-18T00:00:00+02:00</published><updated>2022-05-18T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/18/tree</id><content type="html" xml:base="http://localhost:4000/2022/05/18/tree.html"><![CDATA[<p>Problems about tree on leetcode.</p>
+
+<h4 id="104-maximum-depth-of-binary-tree"><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree</a></h4>
+
+<p>DFS using recursion – time complexity $O(n)$, space complexity $O(h)$ where $h$ is the height of the tree and $n$ is the number of nodes.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">r</span><span class="o">)+</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>DFS using iteration – time complexity $O(n)$, space complexity $O(n)$ where $n$ is the number of nodes.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">TreeNode</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">depth</span><span class="o">++;</span>
+            <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="nc">TreeNode</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">left</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">right</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">depth</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="110-balanced-binary-tree"><a href="https://leetcode.cn/problems/balanced-binary-tree/">110. Balanced Binary Tree</a></h4>
+
+<p>See  <a href="https://leetcode.cn/problems/balanced-binary-tree/solution/balanced-binary-tree-di-gui-fang-fa-by-jin40789108/">110. 平衡二叉树（从底至顶，从顶至底）</a></p>
+
+<p>From top to bottom: exists <strong>Repeated calculation</strong></p>
+
+<p>Determine whether it is a binary balanced tree by comparing the maximum height difference between the left and right subtrees. A tree is only balanced if all its subtrees are balanced.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isBalanced</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">depth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">)</span> <span class="o">-</span> <span class="n">depth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">))</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">isBalanced</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">isBalanced</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">depth</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">depth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">),</span> <span class="n">depth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">))</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The time complexity is $O(N\log_2N)$: $O(N)$ for traverse of the all treenodes, $O(\log_2N)$ is number of treenodes in subtree. The space complexity is $O(N)$: worst case, where tree becomes a linked list.</p>
+
+<p>From botton to top: <strong>Postorder Traversal</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isBalanced</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">recur</span><span class="o">(</span><span class="n">root</span><span class="o">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">recur</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">recur</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">recur</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">right</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">left</span> <span class="o">-</span> <span class="n">right</span><span class="o">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The time complexity is $O(n)$, where $n$ is the number of treenodes in the tree. The space complexity is $O(n)$- the worst case, where tree becomes a linked list.</p>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Problems about tree on leetcode.]]></summary></entry><entry><title type="html">Knapsack Problem</title><link href="http://localhost:4000/2022/05/15/knapsack-problem.html" rel="alternate" type="text/html" title="Knapsack Problem" /><published>2022-05-15T00:00:00+02:00</published><updated>2022-05-15T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/15/knapsack-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/15/knapsack-problem.html"><![CDATA[<p>Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia</p>
 
 <h3 id="0-1-knapsack-problem">0-1 Knapsack Problem</h3>
 
@@ -9,7 +88,7 @@
 
 <p>We create a <strong>len</strong> by <strong>target+1</strong> array of boolean type, where <strong>len</strong> is the length of the oginal array. <strong>dp[i][j]</strong> indicates whether there are some number between <strong>[0,i]</strong>, whose sum is equal to <strong>j</strong> (Each number can only be used once) .</p>
 
-\[dp[i][j]=dp[i-1][j]\text{ or }dp[i-1][j-nums[i]]\]
+<p>$dp[i][j]=dp[i-1][j]\text{ or }dp[i-1][j-nums[i]]$</p>
 
 <ul>
   <li>$dp[i-1][j]$ – $nums[i]$ is NOT chosen.</li>
@@ -270,52 +349,79 @@
         <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">]==</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia]]></summary></entry><entry><title type="html">Tree</title><link href="http://localhost:4000/2022/05/15/tree.html" rel="alternate" type="text/html" title="Tree" /><published>2022-05-15T00:00:00+02:00</published><updated>2022-05-15T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/15/tree</id><content type="html" xml:base="http://localhost:4000/2022/05/15/tree.html"><![CDATA[<p>Problems about tree on leetcode.</p>
+</code></pre></div></div>
 
-<h4 id="104-maximum-depth-of-binary-tree"><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree</a></h4>
+<p>The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.</p>
 
-<p>DFS using recursion – time complexity $O(n)$, space complexity $O(h)$ where $h$ is the height of the tree and $n$ is the number of nodes.</p>
+<h4 id="518-coin-change-2"><a href="https://leetcode.cn/problems/coin-change-2/">518. Coin Change 2</a></h4>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
-        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
-        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">r</span><span class="o">)+</span><span class="mi">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">change</span><span class="o">(</span><span class="kt">int</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">coin</span> <span class="o">:</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coin</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">amount</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="cm">/*
+                	??
+                */</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">coin</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>DFS using iteration – time complexity $O(n)$, space complexity $O(n)$ where $n$ is the number of nodes.</p>
+<p>The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.</p>
+
+<h4 id="139-word-break"><a href="https://leetcode.cn/problems/word-break/">139. Word Break</a></h4>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">root</span><span class="o">==</span><span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">TreeNode</span><span class="o">&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
-        <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
-        <span class="kt">int</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">while</span><span class="o">(!</span><span class="n">q</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">depth</span><span class="o">++;</span>
-            <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="nc">TreeNode</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">left</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">right</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="n">q</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">curr</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">wordBreak</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">wordDict</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">wordDict</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">j</span><span class="o">,</span><span class="n">i</span><span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">])</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
             <span class="o">}</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="n">depth</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Problems about tree on leetcode.]]></summary></entry><entry><title type="html">Transformer Study Notes</title><link href="http://localhost:4000/2022/05/12/transformer-study-notes.html" rel="alternate" type="text/html" title="Transformer Study Notes" /><published>2022-05-12T00:00:00+02:00</published><updated>2022-05-12T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/12/transformer-study-notes</id><content type="html" xml:base="http://localhost:4000/2022/05/12/transformer-study-notes.html"><![CDATA[<p>Useful links:</p>
+</code></pre></div></div>
+
+<h4 id="377-combination-sum-iv"><a href="https://leetcode.cn/problems/combination-sum-iv/">377. Combination Sum IV</a></h4>
+
+<p><strong>如果求组合数就是外层for循环遍历物品，内层for遍历背包</strong>。</p>
+
+<p><strong>如果求排列数就是外层for遍历背包，内层for循环遍历物品</strong>。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">combinationSum4</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">target</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">num:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">num</span><span class="o">)</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">num</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia]]></summary></entry><entry><title type="html">Transformer Study Notes</title><link href="http://localhost:4000/2022/05/12/transformer-study-notes.html" rel="alternate" type="text/html" title="Transformer Study Notes" /><published>2022-05-12T00:00:00+02:00</published><updated>2022-05-12T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/12/transformer-study-notes</id><content type="html" xml:base="http://localhost:4000/2022/05/12/transformer-study-notes.html"><![CDATA[<p>“Attention is all you need.”</p>
 
 <ul>
   <li><a href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</li>
-  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer lecture video</a> by <a href="https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ">Hung-yi Lee</a></li>
+  <li><a href="https://www.bilibili.com/video/BV1pu411o7BE">Transformer论文逐段精读</a></li>
+  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer, Hung-yi Lee</a></li>
 </ul>
 
 <h3 id="1-introduction">1. Introduction</h3>
 
-<p>Recurrent models 的特征：</p>
+<p>Recurrent models：</p>
 
 <ul>
   <li>factor computation along the symbol positions</li>
@@ -323,13 +429,59 @@
   <li>preclude parallelization within training examples (sequential computation)</li>
 </ul>
 
-<p>Attention mechanism 的特征：</p>
+<p>Attention mechanism：</p>
 
 <ul>
   <li>allow modeling of dependencies without regard to their distance in the input or output sequences</li>
 </ul>
 
-<h3 id="2-background">2. Background</h3>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Useful links:]]></summary></entry><entry><title type="html">Dynamic Programming</title><link href="http://localhost:4000/2022/05/06/dynamic-programming.html" rel="alternate" type="text/html" title="Dynamic Programming" /><published>2022-05-06T00:00:00+02:00</published><updated>2022-05-06T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/06/dynamic-programming</id><content type="html" xml:base="http://localhost:4000/2022/05/06/dynamic-programming.html"><![CDATA[<p>Problems about dynamic programming (dp) on leetcode.</p>
+<h3 id="2-background">2. Background</h3>
+
+<p>ConvS2S and ByteNet are difficult to learn dependencies between distant positions and the number of operations grows required to relate signals from two arbitrary input or output positions grows in the distance between positions, linearly and logarithmically respectively.</p>
+
+<p>CNN代替RNN、但使用卷积很难对长的序列进行建模：很多层卷积才能将隔得比较远的位置关联起来。而卷积能一层就把整个序列”看到“。</p>
+
+<p>In the Transformer this is reduced to a constant number of operations. Multi-head attention is used to simulate the multi-channel output of CNN.</p>
+
+<p>但卷积能输出多个通道（不同的特征、模式etc.），所以用多头注意力来模拟。</p>
+
+<h3 id="3-model-architecture">3. Model Architecture</h3>
+
+<p><img src="/pic/transformer.png" style="zoom:50%;" /></p>
+
+<p>Encoder maps an input sequence of symbol representations (x1,…,xn) to a sequence of continuous representations z = (z1,…,zn)</p>
+
+<ul>
+  <li>where $z_t$ is the vector form of $x_t$</li>
+</ul>
+
+<p>Decoder then generates an output sequence (y1, …, ym)</p>
+
+<ul>
+  <li>auto-regressive: 解码器中词是一个一个生成的，且“输入又是输出”
+    <ul>
+      <li>prevent positions from attending to subsequent positions</li>
+      <li>因为在注意力机制中能看到<strong>整个</strong>句子，为了避免t时间能看到t时间以后的输入， 所以采用了masked多头注意力</li>
+      <li>保证训练和预测的行为一致</li>
+    </ul>
+  </li>
+  <li><strong>NB:</strong> m!=n</li>
+</ul>
+
+<p>Layer normalization 对每一个<strong>样本</strong>做normalization，</p>
+
+<ul>
+  <li>全局的均值方差对不定长的句子（比如比训练句更长的测试句）来讲效果不是特别好，所以不用BN</li>
+</ul>
+
+<p><img src="/pic/layer_normalization.png" style="zoom:35%;" /></p>
+
+<p>Scaled Dot-Product Attention</p>
+
+<ul>
+  <li>“scaled”: <a href="https://blog.csdn.net/qq_37430422/article/details/105042303">为什么 dot-product attention 需要被 scaled？</a> “We suspect that for large values of d_k, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients”</li>
+  <li>矩阵乘法利好并行</li>
+</ul>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[“Attention is all you need.”]]></summary></entry><entry><title type="html">Dynamic Programming</title><link href="http://localhost:4000/2022/05/06/dynamic-programming.html" rel="alternate" type="text/html" title="Dynamic Programming" /><published>2022-05-06T00:00:00+02:00</published><updated>2022-05-06T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/06/dynamic-programming</id><content type="html" xml:base="http://localhost:4000/2022/05/06/dynamic-programming.html"><![CDATA[<p>Problems about dynamic programming (dp) on leetcode.</p>
 
 <h4 id="5longest-palindromic-substring"><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.Longest Palindromic Substring</a></h4>
 

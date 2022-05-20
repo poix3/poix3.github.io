@@ -1,7 +1,6 @@
 ---
 layout: post
 
-
 ---
 
 Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. -- wikipedia
@@ -14,7 +13,7 @@ This problem is equivalent to whether we can pick out some numbers whose sum is 
 
  We create a **len** by **target+1** array of boolean type, where **len** is the length of the oginal array. **dp\[i\]\[j\]** indicates whether there are some number between **\[0,i\]**, whose sum is equal to **j** (Each number can only be used once) .
 
-$$dp[i][j]=dp[i-1][j]\text{ or }dp[i-1][j-nums[i]]$$
+$dp[i][j]=dp[i-1][j]\text{ or }dp[i-1][j-nums[i]]$
 
 - $dp[i-1][j]$ -- $nums[i]$ is NOT chosen.
 - $dp[i-1][j-nums[i]]$ -- $nums[i]$ is chosen.
@@ -266,6 +265,71 @@ class Solution {
             }
         }
         return dp[amount]==amount+1 ? -1 : dp[amount];
+    }
+}
+```
+
+The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.
+
+#### [518. Coin Change 2](https://leetcode.cn/problems/coin-change-2/)
+
+```java
+class Solution {
+    public int change(int amount, int[] coins) {
+        int len = coins.length;
+        int[] dp = new int[amount+1];
+        dp[0] = 1;
+        for(int coin : coins) {
+            for(int i=coin; i<=amount; i++) {
+                /*
+                	??
+                */
+                dp[i] = dp[i] + dp[i-coin];
+            }
+        }
+        return dp[amount];
+    }
+}
+```
+
+The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.
+
+#### [139. Word Break](https://leetcode.cn/problems/word-break/)
+
+```java
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean[] dp = new boolean[s.length()+1];
+        dp[0] = true;
+        for(int i=1; i<=s.length(); i++) {
+            for(int j=0; j<i; j++) {
+                if(wordDict.contains(s.substring(j,i)) && dp[j])
+                    dp[i] = true;
+            }
+        }
+        return dp[s.length()];
+    }
+}
+```
+
+#### [377. Combination Sum IV](https://leetcode.cn/problems/combination-sum-iv/)
+
+**如果求组合数就是外层for循环遍历物品，内层for遍历背包**。
+
+**如果求排列数就是外层for遍历背包，内层for循环遍历物品**。
+
+```java
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        int len = nums.length;
+        int[] dp = new int[target+1];
+        dp[0] = 1;
+        for(int i=0; i<=target; i++) {
+            for(int num: nums) {
+                if(i>=num) dp[i] = dp[i] + dp[i-num];
+            }
+        }
+        return dp[target];
     }
 }
 ```
