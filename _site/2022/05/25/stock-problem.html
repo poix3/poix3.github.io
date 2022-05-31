@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Stock Problem | Life in the Woods</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Stock Problem" />
+<meta name="author" content="Fengmao Wang" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="“So we beat on, boats against the current, borne back ceaselessly into the past.”" />
+<meta property="og:description" content="“So we beat on, boats against the current, borne back ceaselessly into the past.”" />
+<link rel="canonical" href="http://localhost:4000/2022/05/25/stock-problem.html" />
+<meta property="og:url" content="http://localhost:4000/2022/05/25/stock-problem.html" />
+<meta property="og:site_name" content="Life in the Woods" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-25T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stock Problem" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fengmao Wang"},"dateModified":"2022-05-25T00:00:00+02:00","datePublished":"2022-05-25T00:00:00+02:00","description":"“So we beat on, boats against the current, borne back ceaselessly into the past.”","headline":"Stock Problem","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022/05/25/stock-problem.html"},"url":"http://localhost:4000/2022/05/25/stock-problem.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Life in the Woods" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Life in the Woods</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/CV/">CV</a><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Stock Problem</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2022-05-25T00:00:00+02:00" itemprop="datePublished">
+        May 25, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <div align="center"><img src="/pic/Verräter_der_Arbeiterklasse.jpeg" width="400" /></div>
+
+<h4 id="309-best-time-to-buy-and-sell-stock-with-cooldown"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309. Best Time to Buy and Sell Stock with Cooldown</a></h4>
+
+<p>$dp[i][j]$ represents the maximum profit in state j on day i and there are 3 conditions:</p>
+
+<ol>
+  <li>don’t hold stock：
+    <ul>
+      <li>no stock sold and didn’t hold stock before(yesterday) – $dp[i][0]$</li>
+      <li>sold stock – $dp[i][1]$</li>
+    </ul>
+  </li>
+  <li>hold stock – $dp[i][2]$</li>
+</ol>
+
+<p>initial state: $dp[i][0]=0, dp[i][1]=0, dp[i][2]=-prices[0]$</p>
+
+<p>状态转移方程:</p>
+
+<ul>
+  <li>$dp[i][0]$ = Math.max($dp[i-1][0], dp[i-1][1]$) – 状态0只能从状态0或1转移而来</li>
+  <li>$dp[i][1]$ = $dp[i-1][2] + prices[i]$ – 买了股票则昨天一定要持有股票</li>
+  <li>$dp[i][2]$ = Math.max($dp[i-1][1]-prices[i], dp[i-1][2]$ – 今天有股票，可以昨天没有今天现买，也可以本来（昨天）就持有股票</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">len</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="mi">3</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">]);</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">]-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">2</span><span class="o">]);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Try to reduce the space complexity to $O(1)$.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">len</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_0</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_2</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">new_0</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_0</span><span class="o">,</span> <span class="n">dp_1</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_1</span> <span class="o">=</span> <span class="n">dp_2</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="kt">int</span> <span class="n">new_2</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_0</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_2</span><span class="o">);</span>
+            <span class="cm">/* new dp states depend on the old ones, 
+               so use 'new' states to avoid changing the old dp states. */</span>
+            <span class="n">dp_0</span> <span class="o">=</span> <span class="n">new_0</span><span class="o">;</span>
+            <span class="n">dp_1</span> <span class="o">=</span> <span class="n">new_1</span><span class="o">;</span>
+            <span class="n">dp_2</span> <span class="o">=</span> <span class="n">new_2</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_0</span><span class="o">,</span> <span class="n">dp_1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="714-best-time-to-buy-and-sell-stock-with-transaction-fee"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. Best Time to Buy and Sell Stock with Transaction Fee</a></h4>
+
+<ol>
+  <li>no stock hold: $dp[i][0]$=Max$(dp[i-1][1]+price,dp[i-1][0])$</li>
+  <li>hold stock: $dp[i][1]$=Max$(dp[i-1][0]-price-fee,dp[i-1][1])$</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">,</span> <span class="kt">int</span> <span class="n">fee</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_2</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">]-</span><span class="n">fee</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">new_1</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_2</span><span class="o">+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_1</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_2</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_1</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]-</span><span class="n">fee</span><span class="o">,</span> <span class="n">dp_2</span><span class="o">);</span>
+            <span class="n">dp_1</span> <span class="o">=</span> <span class="n">new_1</span><span class="o">;</span>
+            <span class="n">dp_2</span> <span class="o">=</span> <span class="n">new_2</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp_1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="123-best-time-to-buy-and-sell-stock-iii"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">123. Best Time to Buy and Sell Stock III</a></h4>
+
+<p>5 states:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>hold stock?</th>
+      <th>number of transactions</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dp_00</td>
+      <td>No/0</td>
+      <td>0</td>
+      <td>恒为0因为一次都没买</td>
+    </tr>
+    <tr>
+      <td>dp_01</td>
+      <td>No/0</td>
+      <td>1</td>
+      <td>卖出过一次现在未持有，可能今天卖出也可能之前(昨天)卖出</td>
+    </tr>
+    <tr>
+      <td>dp_02</td>
+      <td>No/0</td>
+      <td>2</td>
+      <td>卖出了两次现在未持有，可能今天卖出也可能之前(昨天)卖出</td>
+    </tr>
+    <tr>
+      <td>dp_10</td>
+      <td>Yes/1</td>
+      <td>0</td>
+      <td>一次都没卖现在持有，可能今天买的也可能之前(昨天)买的</td>
+    </tr>
+    <tr>
+      <td>dp_11</td>
+      <td>Yes/1</td>
+      <td>1</td>
+      <td>卖出了一次现在持有，可能今天买的也可能之前(昨天)买的</td>
+    </tr>
+    <tr>
+      <td>dp_12</td>
+      <td>Yes/1</td>
+      <td>2</td>
+      <td>卖出了两次次现在持有，不符合题意，不考虑</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_00</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_01</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">dp_02</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_10</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">dp_11</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">new_dp_01</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_10</span><span class="o">+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_01</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_dp_02</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_11</span><span class="o">+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_02</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_dp_10</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_00</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_10</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_dp_11</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_01</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_11</span><span class="o">);</span>
+            <span class="n">dp_01</span> <span class="o">=</span> <span class="n">new_dp_01</span><span class="o">;</span>
+            <span class="n">dp_02</span> <span class="o">=</span> <span class="n">new_dp_02</span><span class="o">;</span>
+            <span class="n">dp_10</span> <span class="o">=</span> <span class="n">new_dp_10</span><span class="o">;</span>
+            <span class="n">dp_11</span> <span class="o">=</span> <span class="n">new_dp_11</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_02</span><span class="o">,</span> <span class="n">dp_01</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>$O(N)$ and $O(1)$.</p>
+
+<p><strong>OR</strong> use time-sequential order: 更加通用的解法见188</p>
+
+<ol>
+  <li>
+    <p>before the first stock buying</p>
+  </li>
+  <li>holding the first stock before selling it</li>
+  <li>selling the first stock</li>
+  <li>before the stock buying but after selling the first stock</li>
+  <li>selling the second stock</li>
+</ol>
+
+<h4 id="188-best-time-to-buy-and-sell-stock-iv"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">188. Best Time to Buy and Sell Stock IV</a></h4>
+
+<p>check <a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/solution/dai-ma-sui-xiang-lu-188-mai-mai-gu-piao-w01v7/">here</a>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="cm">/*
+        	0初始状态，奇买，偶卖
+        	*/</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span> 
+            <span class="cm">/*
+            	-- dp[i] 是当前的最大收益 -- 
+            	买入的节点初始化为 -prices[0]
+            		为什么 ？？？
+            		dp[i] = Integer.MIN_VALUE;也能过
+            	卖出节点初始化为0
+            		是因为买股票的最小的最大收益最少为0 -- 即不买
+            	*/</span>
+        <span class="o">}</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">;</span> <span class="n">j</span><span class="o">+=</span><span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="cm">/*
+                	先更新 dp[j+1] 是为了保证其等号右边的 dp[j] 是"旧"的
+                	*/</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+
+  </div><a class="u-url" href="/2022/05/25/stock-problem.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li class="p-name">Fengmao Wang</li>
+          <li><a class="u-email" href="mailto:wangfm2020@gmail.com">wangfm2020@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>“So we beat on, boats against the current, borne back ceaselessly into the past.”
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/poix3" target="_blank" title="poix3"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/wangfm" target="_blank" title="wangfm"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

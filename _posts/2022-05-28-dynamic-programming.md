@@ -16,8 +16,6 @@ Problems about dynamic programming (dp) on leetcode.
 3. initialize dp table all to **false**
 4. traverse from bottom to top, left to right
 
-<img src="/Users/wangfm/Documents/GitHub/leetcodenotebook/dp/5.png" alt="5" style="zoom:50%;" />
-
 ```java
 class Solution {
     public String longestPalindrome(String s) {
@@ -398,6 +396,125 @@ class Solution {
             }
         }
         return dp[m][n];
+    }
+}
+```
+
+#### [583. Delete Operation for Two Strings](https://leetcode.cn/problems/delete-operation-for-two-strings/)
+
+$dp[i][j]$ -- 以i-1为结尾的字符串word1，和以j-1位结尾的字符串word2，想要达到相等，所需要删除元素的最少次数
+
+- 比如 'sea' 和 'eat'，
+  - $dp[1][1]=2$，'s'和'e'，需要删干净才能相等
+  - $dp[2][1]=1$，'se'和'e'，需要删一个s
+- 当$word1[i]==word[j]$， 此时不需要删除，故依赖于上一个状态：$dp[i][j]=dp[i-1][j-1]$
+- 不等时，删word1 || 删word2: $dp[i][j]=\min(dp[i-1][j]+1,dp[i][j-1]+1)$
+
+```java
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int len1 = word1.length(), len2 = word2.length();
+        int[][] dp = new int[len1+1][len2+1];
+        for(int i=0; i<=len1; i++) dp[i][0] = i;
+        for(int i=0; i<=len2; i++) dp[0][i] = i;
+        for(int i=1; i<=len1; i++) {
+            char c1 = word1.charAt(i-1);
+            for(int j=1; j<=len2; j++) {
+                char c2 = word2.charAt(j-1);
+                if(c1 == c2) {
+                    dp[i][j] = dp[i-1][j-1];
+                }
+                else {
+                    dp[i][j] = Math.min(dp[i-1][j],dp[i][j-1])+1;
+                }
+            }
+        }
+        return dp[len1][len2];
+    }
+}
+```
+
+也可以看作是求最长公共子**序列**，参照1143
+
+```java
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int len1 = word1.length(), len2 = word2.length();
+        int[][] dp = new int[len1+1][len2+1];
+        for(int i=1; i<=len1; i++) {
+            char c1 = word1.charAt(i-1);
+            for(int j=1; j<=len2; j++) {
+                char c2 = word2.charAt(j-1);
+                if(c1 == c2) {
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                }
+                else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return len1+len2-2*dp[len1][len2];
+    }
+}
+```
+
+#### [72. Edit Distance](https://leetcode.cn/problems/edit-distance/)
+
+`dp[i][j]` 代表 `word1` 中前 `i` 个字符，变换到 `word2` 中前 `j` 个字符，最短需要操作的次数
+
+```java
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int len1 = word1.length(), len2 = word2.length();
+        int[][] dp = new int[len1+1][len2+1];
+        for(int i=0; i<=len1; i++) {
+            dp[i][0] = i;
+        }
+        for(int i=0; i<=len2; i++) {
+            dp[0][i] = i;
+        }
+        for(int i=1; i<=len1; i++) {
+            char c1 = word1.charAt(i-1);
+            for(int j=1; j<=len2; j++) {
+                char c2 = word2.charAt(j-1);
+                if(c1 == c2) {
+                    dp[i][j] = dp[i-1][j-1];
+                }
+                else {
+                    dp[i][j] = 1+Math.min(dp[i-1][j-1],Math.min(dp[i-1][j],dp[i][j-1]));
+                    /*
+                    	增：dp[i][j] = dp[i][j - 1] + 1
+                    	删：dp[i][j] = dp[i - 1][j] + 1
+                    	改：dp[i][j] = dp[i - 1][j - 1] + 1
+                    	*/
+                }
+            }
+        }
+        return dp[len1][len2];
+    }
+}
+```
+
+both $O(m*n)$
+
+#### [650. 2 Keys Keyboard](https://leetcode.cn/problems/2-keys-keyboard/)
+
+```java
+class Solution {
+    public int minSteps(int n) {
+        if (n == 1) return 0;
+        int[] dp = new int[n + 1];
+        for (int i = 2; i <= n; i++) {
+            dp[i] = i; //质数
+            int sqrt = (int) Math.sqrt(i); //质数的条件
+            for (int j = 2; j <= sqrt; j++) {
+                if (i % j == 0) {
+                    dp[i] = dp[j] + dp[i / j]; //不是质数，分解因式
+                    break;
+                }
+            }
+        }
+        return dp[n];
     }
 }
 ```

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-20T22:06:12+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Life in the Woods</title><subtitle>“So we beat on, boats against the current, borne back ceaselessly into the past.”
-</subtitle><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><entry><title type="html">Stock Problem</title><link href="http://localhost:4000/2022/05/20/stock-problem.html" rel="alternate" type="text/html" title="Stock Problem" /><published>2022-05-20T00:00:00+02:00</published><updated>2022-05-20T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/20/stock-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/20/stock-problem.html"><![CDATA[]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tree</title><link href="http://localhost:4000/2022/05/18/tree.html" rel="alternate" type="text/html" title="Tree" /><published>2022-05-18T00:00:00+02:00</published><updated>2022-05-18T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/18/tree</id><content type="html" xml:base="http://localhost:4000/2022/05/18/tree.html"><![CDATA[<p>Problems about tree on leetcode.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-29T11:03:04+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Life in the Woods</title><subtitle>“So we beat on, boats against the current, borne back ceaselessly into the past.”
+</subtitle><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><entry><title type="html">Tree</title><link href="http://localhost:4000/2022/05/29/tree.html" rel="alternate" type="text/html" title="Tree" /><published>2022-05-29T00:00:00+02:00</published><updated>2022-05-29T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/29/tree</id><content type="html" xml:base="http://localhost:4000/2022/05/29/tree.html"><![CDATA[<p>Problems about tree on leetcode.</p>
 
 <h4 id="104-maximum-depth-of-binary-tree"><a href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree</a></h4>
 
@@ -78,410 +78,137 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The time complexity is $O(n)$, where $n$ is the number of treenodes in the tree. The space complexity is $O(n)$- the worst case, where tree becomes a linked list.</p>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Problems about tree on leetcode.]]></summary></entry><entry><title type="html">Knapsack Problem</title><link href="http://localhost:4000/2022/05/15/knapsack-problem.html" rel="alternate" type="text/html" title="Knapsack Problem" /><published>2022-05-15T00:00:00+02:00</published><updated>2022-05-15T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/15/knapsack-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/15/knapsack-problem.html"><![CDATA[<p>Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia</p>
+<p>The time complexity is $O(n)$, where $n$ is the number of treenodes in the tree. The space complexity is $O(n)$- the worst case, where tree becomes a linked list.</p>
 
-<h3 id="0-1-knapsack-problem">0-1 Knapsack Problem</h3>
+<h4 id="543-diameter-of-binary-tree"><a href="https://leetcode.cn/problems/diameter-of-binary-tree/">543. Diameter of Binary Tree</a></h4>
 
-<h4 id="416-partition-equal-subset-sum"><a href="https://leetcode.cn/problems/partition-equal-subset-sum/">416. Partition Equal Subset Sum</a></h4>
-
-<p>This problem is equivalent to whether we can pick out some numbers whose sum is equal to half the sum of the whole array.</p>
-
-<p>We create a <strong>len</strong> by <strong>target+1</strong> array of boolean type, where <strong>len</strong> is the length of the oginal array. <strong>dp[i][j]</strong> indicates whether there are some number between <strong>[0,i]</strong>, whose sum is equal to <strong>j</strong> (Each number can only be used once) .</p>
-
-<p>$dp[i][j]=dp[i-1][j]\text{ or }dp[i-1][j-nums[i]]$</p>
-
-<ul>
-  <li>$dp[i-1][j]$ – $nums[i]$ is NOT chosen.</li>
-  <li>$dp[i-1][j-nums[i]]$ – $nums[i]$ is chosen.</li>
-  <li>special case
-    <ul>
-      <li>if $nums[i]==j, dp[i][j]=true$</li>
-    </ul>
-  </li>
-</ul>
+<p>Traverse each node, calculate its longest path (longest left subtree length + longest right subtree length), and update the global variable max.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">t:</span><span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">target</span> <span class="o">+=</span> <span class="n">t</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">target</span><span class="o">%</span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="n">target</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">;</span>
-        <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span>  <span class="kc">true</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">target</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="n">j</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-                <span class="o">}</span>
-                <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">j</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">||</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
-                <span class="o">}</span>
-                <span class="k">else</span> <span class="o">{</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">];</span>
-                <span class="o">}</span>
-                <span class="c1">// pruning</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">target</span><span class="o">]==</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">target</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">diameterOfBinaryTree</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">maxDepth</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
     <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>The time and space complexity is $O(NC)$, where $N$ is the number of elements in $nums$, $C$ is half of the sum of $nums$.</p>
-
-<p>Try to reduce the space complexity to $O(C)$:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">temp:</span> <span class="n">nums</span><span class="o">)</span> <span class="n">target</span> <span class="o">+=</span> <span class="n">temp</span><span class="o">;</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">target</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="n">target</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">;</span>
-        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">target</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
-                <span class="c1">// pruning</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">])</span> <span class="o">{</span>
-                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-                <span class="o">}</span>
-                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">||</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">];</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>When using 1d array, the reverse order is used.</p>
-
-<ul>
-  <li>dp[j] = dp[j] || dp[j - nums[i]] can be understood as dp[j] (new) = dp[j] (old) || dp[j - nums[i]] (old)</li>
-  <li>if sequential order is used, dp[j - nums[i]] will be updated to the new value by the previous operation</li>
-</ul>
-
-<h4 id="494-target-sum"><a href="https://leetcode-cn.com/problems/target-sum/">494. Target Sum</a></h4>
-
-<p>** pay attention that <code class="language-plaintext highlighter-rouge">0 &lt;= nums[i] &lt;= 1000</code></p>
-
-<ul>
-  <li>$dp[i][j]$ is the number of different expressions out of nums from 0 to i.</li>
-  <li>$dp[i][j]=dp[i-1][j-nums[i]]+dp[i-1][j+nums[i]]$, pay attention to the <strong>boundary</strong>.</li>
-  <li>Since ‘+’ and ‘-‘ are both possible, the columns’ meaning of $dp$ is the all possible result.
-    <ul>
-      <li>see <a href="https://leetcode-cn.com/problems/target-sum/solution/dong-tai-gui-hua-si-kao-quan-guo-cheng-by-keepal/">here</a></li>
-    </ul>
-  </li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findTargetSumWays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">temp:</span> <span class="n">nums</span><span class="o">)</span> <span class="n">sum</span> <span class="o">+=</span> <span class="n">temp</span><span class="o">;</span>
-        <span class="k">if</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">sum</span><span class="o">)&lt;</span><span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span><span class="o">))</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="kt">int</span> <span class="n">range</span> <span class="o">=</span> <span class="n">sum</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">range</span><span class="o">];</span>
-        <span class="c1">// consider nums[0]==0</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">sum</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">sum</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span> 
-        
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="n">sum</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">sum</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span><span class="o">((</span><span class="n">j</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])&gt;</span><span class="n">sum</span><span class="o">)</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">sum</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">];</span>
-                <span class="k">else</span> <span class="nf">if</span><span class="o">((</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])&lt;-</span><span class="n">sum</span><span class="o">)</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">sum</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">];</span>
-                <span class="k">else</span> 
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">sum</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">]+</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">sum</span><span class="o">+</span><span class="n">target</span><span class="o">];</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>Moreover, this problem can be converted to 0-1 Knapsack Problem:</p>
-
-<p>Let sum(P) be the set with ‘+’ symbol, sum(N) be the set with ‘-‘ symbol.</p>
-
-<ul>
-  <li>target = sum(P) - sum(N)</li>
-  <li>target + sum(nums) = sum(P) - sum(N) + sum(nums)    //sum(nums) = sum(P) + sum(N)</li>
-  <li>target + sum(nums) = 2 * sum(P)</li>
-  <li>sum(P) = (target + sum(nums)) / 2</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findTargetSumWays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="n">target</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">//why?</span>
-        <span class="cm">/*
-        	If this array somehow can be added to make up a positive number, 
-        	then it must be able to use subtraction to make up its opposite number.
-        	The rest is the same as problem 494 except the bagSize
-        */</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">temp:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">sum</span> <span class="o">+=</span> <span class="n">temp</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">if</span><span class="o">((</span><span class="n">sum</span><span class="o">+</span><span class="n">target</span><span class="o">)%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span> <span class="o">||</span> <span class="n">sum</span><span class="o">&lt;</span><span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-            <span class="cm">/*
-            	the requirement for sum&lt;target here is because of the original question
-            */</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">maxDepth</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="o">}</span> 
-        <span class="kt">int</span> <span class="n">bagSize</span> <span class="o">=</span> <span class="o">(</span><span class="n">sum</span><span class="o">+</span><span class="n">target</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">bagSize</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> 
-        <span class="cm">/*
-            dp[i] indicates the number of ways to sum up to i
-           	the number of ways to sum up to 0 is 1, so initialize it to 1
-        */</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">bagSize</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
-                <span class="cm">/*
-            		j&gt;=nums[i] to make sure j-nums[i] is non-negative
-            	*/</span>
-                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
-            <span class="o">}</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">bagSize</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+        <span class="n">max</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">max</span><span class="o">,</span> <span class="n">l</span><span class="o">+</span><span class="n">r</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">l</span><span class="o">,</span><span class="n">r</span><span class="o">)+</span><span class="mi">1</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h4 id="474-ones-and-zeroes"><a href="https://leetcode.cn/problems/ones-and-zeroes/">474. Ones and Zeroes</a></h4>
+<p>Time complexity: $O(N)$, $N$ is the number of nodes in the tree; Space complexity: $O(H)$, $H$ is the height of the tree.</p>
 
-<p>used 3d dp array.</p>
+<h4 id="226-invert-binary-tree"><a href="https://leetcode.cn/problems/invert-binary-tree/">226. Invert Binary Tree</a></h4>
+
+<p>Starting from the root node, the tree is traversed recursively and flipped from the leaf nodes first.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxForm</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strs</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[][]</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">char</span> <span class="nl">c:</span> <span class="n">strs</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">toCharArray</span><span class="o">())</span> <span class="o">{</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'0'</span><span class="o">)</span> <span class="n">zero</span><span class="o">++;</span> <span class="k">else</span> <span class="n">one</span><span class="o">++;</span>
-            <span class="o">}</span>
-            <span class="n">count</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">zero</span><span class="o">,</span><span class="n">one</span><span class="o">};</span>
-        <span class="o">}</span>  
-        <span class="kt">int</span><span class="o">[][][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">len</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span> <span class="n">one</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-                    <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">zero</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">one</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">-</span><span class="n">zero</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">one</span><span class="o">]+</span><span class="mi">1</span><span class="o">);</span>
-                    <span class="o">}</span>
-                    <span class="k">else</span> <span class="o">{</span>
-                        <span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">];</span>
-                    <span class="o">}</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">TreeNode</span> <span class="nf">invertTree</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+        <span class="nc">TreeNode</span> <span class="n">l</span> <span class="o">=</span> <span class="n">invertTree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+        <span class="nc">TreeNode</span> <span class="n">r</span> <span class="o">=</span> <span class="n">invertTree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+        <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+        <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The time complexity for pre-processing is $O(\sum_{i=0}^{k-1}len(strs[i]))$ and for the state transition is $O(k<em>m</em>n)$.</p>
+<p>Time complexity: $O(N)$, $N$ is the number of nodes in the tree; Space complexity: $O(N)$ – in worst case, the binary tree becomes a linked list. average case $O(\log N)$, where $\log N$ is the height of the binary tree.</p>
 
-<p>The space complexity is $O(k<em>m</em>n)$</p>
-
-<p>Now try to reduce the space complexity to $O(m*n)$, similar to Problem 416.</p>
+<h4 id="617-merge-two-binary-trees"><a href="https://leetcode.cn/problems/merge-two-binary-trees/">617. Merge Two Binary Trees</a></h4>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxForm</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strs</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[][]</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">char</span> <span class="nl">c:</span> <span class="n">strs</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">toCharArray</span><span class="o">())</span> <span class="o">{</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'0'</span><span class="o">)</span> <span class="n">zero</span><span class="o">++;</span> <span class="k">else</span> <span class="n">one</span><span class="o">++;</span>
-            <span class="o">}</span>
-            <span class="n">count</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">zero</span><span class="o">,</span><span class="n">one</span><span class="o">};</span>
-        <span class="o">}</span>  
-        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">len</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span> <span class="n">one</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">zero</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
-                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">one</span><span class="o">;</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">zero</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">one</span><span class="o">]+</span><span class="mi">1</span><span class="o">);</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+    <span class="kd">public</span> <span class="nc">TreeNode</span> <span class="nf">mergeTrees</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root1</span><span class="o">,</span> <span class="nc">TreeNode</span> <span class="n">root2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root1</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="n">root2</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="n">root1</span><span class="o">;</span>
+        <span class="nc">TreeNode</span> <span class="n">l</span> <span class="o">=</span> <span class="n">mergeTrees</span><span class="o">(</span><span class="n">root1</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">root2</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
+        <span class="nc">TreeNode</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mergeTrees</span><span class="o">(</span><span class="n">root1</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">root2</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">TreeNode</span><span class="o">(</span><span class="n">root1</span><span class="o">.</span><span class="na">val</span><span class="o">+</span><span class="n">root2</span><span class="o">.</span><span class="na">val</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h3 id="unbounded-knapsack-problem-ukp">Unbounded Knapsack Problem (UKP)</h3>
-
-<p><img src="/pic/knapsack.png" alt="" /></p>
-
-<p>See <a href="https://leetcode.cn/problems/coin-change/solution/by-flix-su7s/">here</a>.</p>
-
-<h4 id="322-coin-change"><a href="https://leetcode.cn/problems/coin-change/">322. Coin Change</a></h4>
+<h4 id="112-path-sum"><a href="https://leetcode.cn/problems/path-sum/">112. Path Sum</a></h4>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">amount</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="nc">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">dp</span><span class="o">,</span> <span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">coin</span> <span class="o">:</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">coin</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="cm">/*
-                	note that the second loop traverse from left to right, 
-                	which is different from 0-1 knapsack problem. 
-                	This difference is determined by their 状态转移方程. 
-                	See above.
-                */</span>
-                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">coin</span><span class="o">]+</span><span class="mi">1</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">]==</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasPathSum</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="n">targetSum</span> <span class="o">==</span> <span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">hasPathSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">-</span><span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="o">||</span> <span class="n">hasPathSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">-</span><span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.</p>
+<p>$O(N)$ and $O(H)/O(\log N)$</p>
 
-<h4 id="518-coin-change-2"><a href="https://leetcode.cn/problems/coin-change-2/">518. Coin Change 2</a></h4>
+<h4 id="437-path-sum-iii"><a href="https://leetcode.cn/problems/path-sum-iii/">437. Path Sum III</a></h4>
+
+<p>双重递归：即对于每个节点（第一层递归），求其满足条件的路径（第二层递归）</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">change</span><span class="o">(</span><span class="kt">int</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">coin</span> <span class="o">:</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coin</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">amount</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="cm">/*
-                	??
-                */</span>
-                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">coin</span><span class="o">];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">pathSum</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">rootSum</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">)+</span><span class="n">pathSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">)+</span><span class="n">pathSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">rootSum</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">targetSum</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">targetSum</span><span class="o">)</span> <span class="n">cnt</span><span class="o">++;</span>
+        <span class="k">return</span> <span class="n">cnt</span><span class="o">+</span><span class="n">rootSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">-</span><span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">)+</span><span class="n">rootSum</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">targetSum</span><span class="o">-</span><span class="n">root</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.</p>
+<p>$O(N^2)$ and $O(N)$</p>
 
-<h4 id="139-word-break"><a href="https://leetcode.cn/problems/word-break/">139. Word Break</a></h4>
+<h4 id="572-subtree-of-another-tree"><a href="https://leetcode.cn/problems/subtree-of-another-tree/">572. Subtree of Another Tree</a></h4>
+
+<p>双重递归</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">wordBreak</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">wordDict</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">wordDict</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">j</span><span class="o">,</span><span class="n">i</span><span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">])</span>
-                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSubtree</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="nc">TreeNode</span> <span class="n">subRoot</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">subRoot</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">//特判</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">isSametree</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">subRoot</span><span class="o">)</span> <span class="o">||</span> <span class="n">isSubtree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">subRoot</span><span class="o">)</span> <span class="o">||</span> <span class="n">isSubtree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">subRoot</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSametree</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="nc">TreeNode</span> <span class="n">subRoot</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">subRoot</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">subRoot</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">!=</span> <span class="n">subRoot</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">isSametree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">subRoot</span><span class="o">.</span><span class="na">left</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">isSametree</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">subRoot</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h4 id="377-combination-sum-iv"><a href="https://leetcode.cn/problems/combination-sum-iv/">377. Combination Sum IV</a></h4>
+<p>Time complexity: $O(m*n)$, where m and n are the number of nodes of the trees.</p>
 
-<p><strong>如果求组合数就是外层for循环遍历物品，内层for遍历背包</strong>。</p>
+<p>Space complexity:$O(\max(d1，d2))$, depth</p>
 
-<p><strong>如果求排列数就是外层for遍历背包，内层for循环遍历物品</strong>。</p>
+<h4 id="101-symmetric-tree"><a href="https://leetcode.cn/problems/symmetric-tree/">101. Symmetric Tree</a></h4>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">combinationSum4</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
-        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">target</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">num:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">num</span><span class="o">)</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">num</span><span class="o">];</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">];</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSymmetric</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">helper</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">helper</span><span class="o">(</span><span class="nc">TreeNode</span> <span class="n">root1</span><span class="o">,</span> <span class="nc">TreeNode</span> <span class="n">root2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root2</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">root1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">root2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">root1</span><span class="o">.</span><span class="na">val</span> <span class="o">!=</span> <span class="n">root2</span><span class="o">.</span><span class="na">val</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">return</span> <span class="nf">helper</span><span class="o">(</span><span class="n">root1</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">root2</span><span class="o">.</span><span class="na">right</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">helper</span><span class="o">(</span><span class="n">root1</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">root2</span><span class="o">.</span><span class="na">left</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia]]></summary></entry><entry><title type="html">Transformer Study Notes</title><link href="http://localhost:4000/2022/05/12/transformer-study-notes.html" rel="alternate" type="text/html" title="Transformer Study Notes" /><published>2022-05-12T00:00:00+02:00</published><updated>2022-05-12T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/12/transformer-study-notes</id><content type="html" xml:base="http://localhost:4000/2022/05/12/transformer-study-notes.html"><![CDATA[<p>“Attention is all you need.”</p>
+</code></pre></div></div>
 
-<ul>
-  <li><a href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</li>
-  <li><a href="https://www.bilibili.com/video/BV1pu411o7BE">Transformer论文逐段精读</a></li>
-  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer, Hung-yi Lee</a></li>
-</ul>
-
-<h3 id="1-introduction">1. Introduction</h3>
-
-<p>Recurrent models：</p>
-
-<ul>
-  <li>factor computation along the symbol positions</li>
-  <li>align the positions to steps in computation time ($h_{t-1}\rightarrow h_t$)</li>
-  <li>preclude parallelization within training examples (sequential computation)</li>
-</ul>
-
-<p>Attention mechanism：</p>
-
-<ul>
-  <li>allow modeling of dependencies without regard to their distance in the input or output sequences</li>
-</ul>
-
-<h3 id="2-background">2. Background</h3>
-
-<p>ConvS2S and ByteNet are difficult to learn dependencies between distant positions and the number of operations grows required to relate signals from two arbitrary input or output positions grows in the distance between positions, linearly and logarithmically respectively.</p>
-
-<p>CNN代替RNN、但使用卷积很难对长的序列进行建模：很多层卷积才能将隔得比较远的位置关联起来。而卷积能一层就把整个序列”看到“。</p>
-
-<p>In the Transformer this is reduced to a constant number of operations. Multi-head attention is used to simulate the multi-channel output of CNN.</p>
-
-<p>但卷积能输出多个通道（不同的特征、模式etc.），所以用多头注意力来模拟。</p>
-
-<h3 id="3-model-architecture">3. Model Architecture</h3>
-
-<p><img src="/pic/transformer.png" style="zoom:50%;" /></p>
-
-<p>Encoder maps an input sequence of symbol representations (x1,…,xn) to a sequence of continuous representations z = (z1,…,zn)</p>
-
-<ul>
-  <li>where $z_t$ is the vector form of $x_t$</li>
-</ul>
-
-<p>Decoder then generates an output sequence (y1, …, ym)</p>
-
-<ul>
-  <li>auto-regressive: 解码器中词是一个一个生成的，且“输入又是输出”
-    <ul>
-      <li>prevent positions from attending to subsequent positions</li>
-      <li>因为在注意力机制中能看到<strong>整个</strong>句子，为了避免t时间能看到t时间以后的输入， 所以采用了masked多头注意力</li>
-      <li>保证训练和预测的行为一致</li>
-    </ul>
-  </li>
-  <li><strong>NB:</strong> m!=n</li>
-</ul>
-
-<p>Layer normalization 对每一个<strong>样本</strong>做normalization，</p>
-
-<ul>
-  <li>全局的均值方差对不定长的句子（比如比训练句更长的测试句）来讲效果不是特别好，所以不用BN</li>
-</ul>
-
-<p><img src="/pic/layer_normalization.png" style="zoom:35%;" /></p>
-
-<p>Scaled Dot-Product Attention</p>
-
-<ul>
-  <li>“scaled”: <a href="https://blog.csdn.net/qq_37430422/article/details/105042303">为什么 dot-product attention 需要被 scaled？</a> “We suspect that for large values of d_k, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients”</li>
-  <li>矩阵乘法利好并行</li>
-</ul>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[“Attention is all you need.”]]></summary></entry><entry><title type="html">Dynamic Programming</title><link href="http://localhost:4000/2022/05/06/dynamic-programming.html" rel="alternate" type="text/html" title="Dynamic Programming" /><published>2022-05-06T00:00:00+02:00</published><updated>2022-05-06T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/06/dynamic-programming</id><content type="html" xml:base="http://localhost:4000/2022/05/06/dynamic-programming.html"><![CDATA[<p>Problems about dynamic programming (dp) on leetcode.</p>
+<p>both $O(N)$</p>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Problems about tree on leetcode.]]></summary></entry><entry><title type="html">Dynamic Programming</title><link href="http://localhost:4000/2022/05/28/dynamic-programming.html" rel="alternate" type="text/html" title="Dynamic Programming" /><published>2022-05-28T00:00:00+02:00</published><updated>2022-05-28T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/28/dynamic-programming</id><content type="html" xml:base="http://localhost:4000/2022/05/28/dynamic-programming.html"><![CDATA[<p>Problems about dynamic programming (dp) on leetcode.</p>
 
 <h4 id="5longest-palindromic-substring"><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5.Longest Palindromic Substring</a></h4>
 
@@ -501,8 +228,6 @@
   <li>initialize dp table all to <strong>false</strong></li>
   <li>traverse from bottom to top, left to right</li>
 </ol>
-
-<p><img src="/Users/wangfm/Documents/GitHub/leetcodenotebook/dp/5.png" alt="5" style="zoom:50%;" /></p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">longestPalindrome</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
@@ -877,4 +602,762 @@
         <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Problems about dynamic programming (dp) on leetcode.]]></summary></entry></feed>
+</code></pre></div></div>
+
+<h4 id="583-delete-operation-for-two-strings"><a href="https://leetcode.cn/problems/delete-operation-for-two-strings/">583. Delete Operation for Two Strings</a></h4>
+
+<p>$dp[i][j]$ – 以i-1为结尾的字符串word1，和以j-1位结尾的字符串word2，想要达到相等，所需要删除元素的最少次数</p>
+
+<ul>
+  <li>比如 ‘sea’ 和 ‘eat’，
+    <ul>
+      <li>$dp[1][1]=2$，’s’和’e’，需要删干净才能相等</li>
+      <li>$dp[2][1]=1$，’se’和’e’，需要删一个s</li>
+    </ul>
+  </li>
+  <li>当$word1[i]==word[j]$， 此时不需要删除，故依赖于上一个状态：$dp[i][j]=dp[i-1][j-1]$</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>不等时，删word1</td>
+          <td> </td>
+          <td>删word2: $dp[i][j]=\min(dp[i-1][j]+1,dp[i][j-1]+1)$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">minDistance</span><span class="o">(</span><span class="nc">String</span> <span class="n">word1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">word2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len1</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">len2</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len1</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">len2</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">len2</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="kt">char</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">])+</span><span class="mi">1</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len1</span><span class="o">][</span><span class="n">len2</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>也可以看作是求最长公共子<strong>序列</strong>，参照1143</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">minDistance</span><span class="o">(</span><span class="nc">String</span> <span class="n">word1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">word2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len1</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">len2</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len1</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">len2</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">len2</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="kt">char</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="o">]);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">len1</span><span class="o">+</span><span class="n">len2</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">dp</span><span class="o">[</span><span class="n">len1</span><span class="o">][</span><span class="n">len2</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="72-edit-distance"><a href="https://leetcode.cn/problems/edit-distance/">72. Edit Distance</a></h4>
+
+<p><code class="language-plaintext highlighter-rouge">dp[i][j]</code> 代表 <code class="language-plaintext highlighter-rouge">word1</code> 中前 <code class="language-plaintext highlighter-rouge">i</code> 个字符，变换到 <code class="language-plaintext highlighter-rouge">word2</code> 中前 <code class="language-plaintext highlighter-rouge">j</code> 个字符，最短需要操作的次数</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">minDistance</span><span class="o">(</span><span class="nc">String</span> <span class="n">word1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">word2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len1</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">length</span><span class="o">(),</span> <span class="n">len2</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len1</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">len2</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">len1</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">word1</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">len2</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="kt">char</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">word2</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">];</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">],</span><span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]));</span>
+                    <span class="cm">/*
+                    	增：dp[i][j] = dp[i][j - 1] + 1
+                    	删：dp[i][j] = dp[i - 1][j] + 1
+                    	改：dp[i][j] = dp[i - 1][j - 1] + 1
+                    	*/</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len1</span><span class="o">][</span><span class="n">len2</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>both $O(m*n)$</p>
+
+<h4 id="650-2-keys-keyboard"><a href="https://leetcode.cn/problems/2-keys-keyboard/">650. 2 Keys Keyboard</a></h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">minSteps</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span> <span class="c1">//质数</span>
+            <span class="kt">int</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="c1">//质数的条件</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">sqrt</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">/</span> <span class="n">j</span><span class="o">];</span> <span class="c1">//不是质数，分解因式</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Problems about dynamic programming (dp) on leetcode.]]></summary></entry><entry><title type="html">Stock Problem</title><link href="http://localhost:4000/2022/05/25/stock-problem.html" rel="alternate" type="text/html" title="Stock Problem" /><published>2022-05-25T00:00:00+02:00</published><updated>2022-05-25T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/25/stock-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/25/stock-problem.html"><![CDATA[<div align="center"><img src="/pic/Verräter_der_Arbeiterklasse.jpeg" width="400" /></div>
+
+<h4 id="309-best-time-to-buy-and-sell-stock-with-cooldown"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309. Best Time to Buy and Sell Stock with Cooldown</a></h4>
+
+<p>$dp[i][j]$ represents the maximum profit in state j on day i and there are 3 conditions:</p>
+
+<ol>
+  <li>don’t hold stock：
+    <ul>
+      <li>no stock sold and didn’t hold stock before(yesterday) – $dp[i][0]$</li>
+      <li>sold stock – $dp[i][1]$</li>
+    </ul>
+  </li>
+  <li>hold stock – $dp[i][2]$</li>
+</ol>
+
+<p>initial state: $dp[i][0]=0, dp[i][1]=0, dp[i][2]=-prices[0]$</p>
+
+<p>状态转移方程:</p>
+
+<ul>
+  <li>$dp[i][0]$ = Math.max($dp[i-1][0], dp[i-1][1]$) – 状态0只能从状态0或1转移而来</li>
+  <li>$dp[i][1]$ = $dp[i-1][2] + prices[i]$ – 买了股票则昨天一定要持有股票</li>
+  <li>$dp[i][2]$ = Math.max($dp[i-1][1]-prices[i], dp[i-1][2]$ – 今天有股票，可以昨天没有今天现买，也可以本来（昨天）就持有股票</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">len</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="mi">3</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">]);</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">]-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">2</span><span class="o">]);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Try to reduce the space complexity to $O(1)$.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">len</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_0</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_2</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">new_0</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_0</span><span class="o">,</span> <span class="n">dp_1</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_1</span> <span class="o">=</span> <span class="n">dp_2</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="kt">int</span> <span class="n">new_2</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_0</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_2</span><span class="o">);</span>
+            <span class="cm">/* new dp states depend on the old ones, 
+               so use 'new' states to avoid changing the old dp states. */</span>
+            <span class="n">dp_0</span> <span class="o">=</span> <span class="n">new_0</span><span class="o">;</span>
+            <span class="n">dp_1</span> <span class="o">=</span> <span class="n">new_1</span><span class="o">;</span>
+            <span class="n">dp_2</span> <span class="o">=</span> <span class="n">new_2</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_0</span><span class="o">,</span> <span class="n">dp_1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="714-best-time-to-buy-and-sell-stock-with-transaction-fee"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. Best Time to Buy and Sell Stock with Transaction Fee</a></h4>
+
+<ol>
+  <li>no stock hold: $dp[i][0]$=Max$(dp[i-1][1]+price,dp[i-1][0])$</li>
+  <li>hold stock: $dp[i][1]$=Max$(dp[i-1][0]-price-fee,dp[i-1][1])$</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">,</span> <span class="kt">int</span> <span class="n">fee</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_2</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">]-</span><span class="n">fee</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">new_1</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_2</span><span class="o">+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_1</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_2</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_1</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]-</span><span class="n">fee</span><span class="o">,</span> <span class="n">dp_2</span><span class="o">);</span>
+            <span class="n">dp_1</span> <span class="o">=</span> <span class="n">new_1</span><span class="o">;</span>
+            <span class="n">dp_2</span> <span class="o">=</span> <span class="n">new_2</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp_1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="123-best-time-to-buy-and-sell-stock-iii"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">123. Best Time to Buy and Sell Stock III</a></h4>
+
+<p>5 states:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>hold stock?</th>
+      <th>number of transactions</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>dp_00</td>
+      <td>No/0</td>
+      <td>0</td>
+      <td>恒为0因为一次都没买</td>
+    </tr>
+    <tr>
+      <td>dp_01</td>
+      <td>No/0</td>
+      <td>1</td>
+      <td>卖出过一次现在未持有，可能今天卖出也可能之前(昨天)卖出</td>
+    </tr>
+    <tr>
+      <td>dp_02</td>
+      <td>No/0</td>
+      <td>2</td>
+      <td>卖出了两次现在未持有，可能今天卖出也可能之前(昨天)卖出</td>
+    </tr>
+    <tr>
+      <td>dp_10</td>
+      <td>Yes/1</td>
+      <td>0</td>
+      <td>一次都没卖现在持有，可能今天买的也可能之前(昨天)买的</td>
+    </tr>
+    <tr>
+      <td>dp_11</td>
+      <td>Yes/1</td>
+      <td>1</td>
+      <td>卖出了一次现在持有，可能今天买的也可能之前(昨天)买的</td>
+    </tr>
+    <tr>
+      <td>dp_12</td>
+      <td>Yes/1</td>
+      <td>2</td>
+      <td>卖出了两次次现在持有，不符合题意，不考虑</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_00</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">dp_01</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="o">,</span> <span class="n">dp_02</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">dp_10</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">dp_11</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">new_dp_01</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_10</span><span class="o">+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_01</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_dp_02</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_11</span><span class="o">+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_02</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_dp_10</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_00</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_10</span><span class="o">);</span>
+            <span class="kt">int</span> <span class="n">new_dp_11</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_01</span><span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">dp_11</span><span class="o">);</span>
+            <span class="n">dp_01</span> <span class="o">=</span> <span class="n">new_dp_01</span><span class="o">;</span>
+            <span class="n">dp_02</span> <span class="o">=</span> <span class="n">new_dp_02</span><span class="o">;</span>
+            <span class="n">dp_10</span> <span class="o">=</span> <span class="n">new_dp_10</span><span class="o">;</span>
+            <span class="n">dp_11</span> <span class="o">=</span> <span class="n">new_dp_11</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_02</span><span class="o">,</span> <span class="n">dp_01</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>$O(N)$ and $O(1)$.</p>
+
+<p><strong>OR</strong> use time-sequential order: 更加通用的解法见188</p>
+
+<ol>
+  <li>
+    <p>before the first stock buying</p>
+  </li>
+  <li>holding the first stock before selling it</li>
+  <li>selling the first stock</li>
+  <li>before the stock buying but after selling the first stock</li>
+  <li>selling the second stock</li>
+</ol>
+
+<h4 id="188-best-time-to-buy-and-sell-stock-iv"><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">188. Best Time to Buy and Sell Stock IV</a></h4>
+
+<p>check <a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/solution/dai-ma-sui-xiang-lu-188-mai-mai-gu-piao-w01v7/">here</a>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span><span class="o">=</span><span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="cm">/*
+        	0初始状态，奇买，偶卖
+        	*/</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">;</span> <span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span> 
+            <span class="cm">/*
+            	-- dp[i] 是当前的最大收益 -- 
+            	买入的节点初始化为 -prices[0]
+            		为什么 ？？？
+            		dp[i] = Integer.MIN_VALUE;也能过
+            	卖出节点初始化为0
+            		是因为买股票的最小的最大收益最少为0 -- 即不买
+            	*/</span>
+        <span class="o">}</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">;</span> <span class="n">j</span><span class="o">+=</span><span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]+</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">]-</span><span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="cm">/*
+                	先更新 dp[j+1] 是为了保证其等号右边的 dp[j] 是"旧"的
+                	*/</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Knapsack Problem</title><link href="http://localhost:4000/2022/05/20/knapsack-problem.html" rel="alternate" type="text/html" title="Knapsack Problem" /><published>2022-05-20T00:00:00+02:00</published><updated>2022-05-20T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/20/knapsack-problem</id><content type="html" xml:base="http://localhost:4000/2022/05/20/knapsack-problem.html"><![CDATA[<p>Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia</p>
+
+<h3 id="0-1-knapsack-problem">0-1 Knapsack Problem</h3>
+
+<h4 id="416-partition-equal-subset-sum"><a href="https://leetcode.cn/problems/partition-equal-subset-sum/">416. Partition Equal Subset Sum</a></h4>
+
+<p>This problem is equivalent to whether we can pick out some numbers whose sum is equal to half the sum of the whole array.</p>
+
+<p>We create a <strong>len</strong> by <strong>target+1</strong> array of boolean type, where <strong>len</strong> is the length of the oginal array. <strong>dp[i][j]</strong> indicates whether there are some number between <strong>[0,i]</strong>, whose sum is equal to <strong>j</strong> (Each number can only be used once) .</p>
+
+<p>$dp[i][j]=dp[i-1][j]\text{ or }dp[i-1][j-nums[i]]$</p>
+
+<ul>
+  <li>$dp[i-1][j]$ – $nums[i]$ is NOT chosen.</li>
+  <li>$dp[i-1][j-nums[i]]$ – $nums[i]$ is chosen.</li>
+  <li>special case
+    <ul>
+      <li>if $nums[i]==j, dp[i][j]=true$</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">t:</span><span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">target</span> <span class="o">+=</span> <span class="n">t</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">target</span><span class="o">%</span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">target</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kt">boolean</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span>  <span class="kc">true</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">target</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="nf">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">||</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
+                <span class="o">}</span>
+                <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">];</span>
+                <span class="o">}</span>
+                <span class="c1">// pruning</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">target</span><span class="o">]==</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">target</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The time and space complexity is $O(NC)$, where $N$ is the number of elements in $nums$, $C$ is half of the sum of $nums$.</p>
+
+<p>Try to reduce the space complexity to $O(C)$:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">temp:</span> <span class="n">nums</span><span class="o">)</span> <span class="n">target</span> <span class="o">+=</span> <span class="n">temp</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">target</span><span class="o">%</span><span class="mi">2</span><span class="o">!=</span><span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="n">target</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">target</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
+                <span class="c1">// pruning</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">])</span> <span class="o">{</span>
+                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">||</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When using 1d array, the reverse order is used.</p>
+
+<ul>
+  <li>dp[j] = dp[j] || dp[j - nums[i]] can be understood as dp[j] (new) = dp[j] (old) || dp[j - nums[i]] (old)</li>
+  <li>if sequential order is used, dp[j - nums[i]] will be updated to the new value by the previous operation</li>
+</ul>
+
+<h4 id="494-target-sum"><a href="https://leetcode-cn.com/problems/target-sum/">494. Target Sum</a></h4>
+
+<p>** pay attention that <code class="language-plaintext highlighter-rouge">0 &lt;= nums[i] &lt;= 1000</code></p>
+
+<ul>
+  <li>$dp[i][j]$ is the number of different expressions out of nums from 0 to i.</li>
+  <li>$dp[i][j]=dp[i-1][j-nums[i]]+dp[i-1][j+nums[i]]$, pay attention to the <strong>boundary</strong>.</li>
+  <li>Since ‘+’ and ‘-‘ are both possible, the columns’ meaning of $dp$ is the all possible result.
+    <ul>
+      <li>see <a href="https://leetcode-cn.com/problems/target-sum/solution/dong-tai-gui-hua-si-kao-quan-guo-cheng-by-keepal/">here</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findTargetSumWays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">temp:</span> <span class="n">nums</span><span class="o">)</span> <span class="n">sum</span> <span class="o">+=</span> <span class="n">temp</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">sum</span><span class="o">)&lt;</span><span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span><span class="o">))</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">range</span> <span class="o">=</span> <span class="n">sum</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">range</span><span class="o">];</span>
+        <span class="c1">// consider nums[0]==0</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">sum</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">sum</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span> 
+        
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=-</span><span class="n">sum</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">sum</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">((</span><span class="n">j</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])&gt;</span><span class="n">sum</span><span class="o">)</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">sum</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">];</span>
+                <span class="k">else</span> <span class="nf">if</span><span class="o">((</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">])&lt;-</span><span class="n">sum</span><span class="o">)</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">sum</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">];</span>
+                <span class="k">else</span> 
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">sum</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">]+</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]+</span><span class="n">sum</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">sum</span><span class="o">+</span><span class="n">target</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Moreover, this problem can be converted to 0-1 Knapsack Problem:</p>
+
+<p>Let sum(P) be the set with ‘+’ symbol, sum(N) be the set with ‘-‘ symbol.</p>
+
+<ul>
+  <li>target = sum(P) - sum(N)</li>
+  <li>target + sum(nums) = sum(P) - sum(N) + sum(nums)    //sum(nums) = sum(P) + sum(N)</li>
+  <li>target + sum(nums) = 2 * sum(P)</li>
+  <li>sum(P) = (target + sum(nums)) / 2</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findTargetSumWays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">//why?</span>
+        <span class="cm">/*
+        	If this array somehow can be added to make up a positive number, 
+        	then it must be able to use subtraction to make up its opposite number.
+        	The rest is the same as problem 494 except the bagSize
+        */</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">temp:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">temp</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">((</span><span class="n">sum</span><span class="o">+</span><span class="n">target</span><span class="o">)%</span><span class="mi">2</span><span class="o">==</span><span class="mi">1</span> <span class="o">||</span> <span class="n">sum</span><span class="o">&lt;</span><span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+            <span class="cm">/*
+            	the requirement for sum&lt;target here is because of the original question
+            */</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span> 
+        <span class="kt">int</span> <span class="n">bagSize</span> <span class="o">=</span> <span class="o">(</span><span class="n">sum</span><span class="o">+</span><span class="n">target</span><span class="o">)/</span><span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">bagSize</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> 
+        <span class="cm">/*
+            dp[i] indicates the number of ways to sum up to i
+           	the number of ways to sum up to 0 is 1, so initialize it to 1
+        */</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">bagSize</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
+                <span class="cm">/*
+            		j&gt;=nums[i] to make sure j-nums[i] is non-negative
+            	*/</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+=</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">bagSize</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="474-ones-and-zeroes"><a href="https://leetcode.cn/problems/ones-and-zeroes/">474. Ones and Zeroes</a></h4>
+
+<p>used 3d dp array.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxForm</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strs</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">char</span> <span class="nl">c:</span> <span class="n">strs</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">toCharArray</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'0'</span><span class="o">)</span> <span class="n">zero</span><span class="o">++;</span> <span class="k">else</span> <span class="n">one</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="n">count</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">zero</span><span class="o">,</span><span class="n">one</span><span class="o">};</span>
+        <span class="o">}</span>  
+        <span class="kt">int</span><span class="o">[][][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">len</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span> <span class="n">one</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                    <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">zero</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">one</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">],</span><span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">-</span><span class="n">zero</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">one</span><span class="o">]+</span><span class="mi">1</span><span class="o">);</span>
+                    <span class="o">}</span>
+                    <span class="k">else</span> <span class="o">{</span>
+                        <span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">];</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The time complexity for pre-processing is $O(\sum_{i=0}^{k-1}len(strs[i]))$ and for the state transition is $O(k<em>m</em>n)$.</p>
+
+<p>The space complexity is $O(k<em>m</em>n)$</p>
+
+<p>Now try to reduce the space complexity to $O(m*n)$, similar to Problem 416.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxForm</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strs</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">][</span><span class="mi">2</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">char</span> <span class="nl">c:</span> <span class="n">strs</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">toCharArray</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">c</span><span class="o">==</span><span class="sc">'0'</span><span class="o">)</span> <span class="n">zero</span><span class="o">++;</span> <span class="k">else</span> <span class="n">one</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="n">count</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">zero</span><span class="o">,</span><span class="n">one</span><span class="o">};</span>
+        <span class="o">}</span>  
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">len</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">0</span><span class="o">],</span> <span class="n">one</span> <span class="o">=</span> <span class="n">count</span><span class="o">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="o">][</span><span class="mi">1</span><span class="o">];</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">zero</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+                <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="n">one</span><span class="o">;</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">zero</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">one</span><span class="o">]+</span><span class="mi">1</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="unbounded-knapsack-problem-ukp">Unbounded Knapsack Problem (UKP)</h3>
+
+<p><img src="/pic/knapsack.png" alt="" /></p>
+
+<p>See <a href="https://leetcode.cn/problems/coin-change/solution/by-flix-su7s/">here</a>.</p>
+
+<h4 id="322-coin-change"><a href="https://leetcode.cn/problems/coin-change/">322. Coin Change</a></h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">coinChange</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">,</span> <span class="kt">int</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">amount</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">dp</span><span class="o">,</span> <span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">coin</span> <span class="o">:</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">coin</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="cm">/*
+                	note that the second loop traverse from left to right, 
+                	which is different from 0-1 knapsack problem. 
+                	This difference is determined by their 状态转移方程. 
+                	See above.
+                */</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">],</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">coin</span><span class="o">]+</span><span class="mi">1</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">]==</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.</p>
+
+<h4 id="518-coin-change-2"><a href="https://leetcode.cn/problems/coin-change-2/">518. Coin Change 2</a></h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">change</span><span class="o">(</span><span class="kt">int</span> <span class="n">amount</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">coins</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">coin</span> <span class="o">:</span> <span class="n">coins</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">coin</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">amount</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="cm">/*
+                	??
+                */</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">coin</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The time complexity is $O(n\times amount)$, space complexity is $O(amount)$, where n is the length of coins array.</p>
+
+<h4 id="139-word-break"><a href="https://leetcode.cn/problems/word-break/">139. Word Break</a></h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">wordBreak</span><span class="o">(</span><span class="nc">String</span> <span class="n">s</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">wordDict</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">wordDict</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">j</span><span class="o">,</span><span class="n">i</span><span class="o">))</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="o">[</span><span class="n">j</span><span class="o">])</span>
+                    <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="377-combination-sum-iv"><a href="https://leetcode.cn/problems/combination-sum-iv/">377. Combination Sum IV</a></h4>
+
+<p><strong>如果求组合数就是外层for循环遍历物品，内层for遍历背包</strong>。</p>
+
+<p><strong>如果求排列数就是外层for遍历背包，内层for循环遍历物品</strong>。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">combinationSum4</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
+        <span class="n">dp</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">target</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="nl">num:</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">num</span><span class="o">)</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">num</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">target</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible. – wikipedia]]></summary></entry><entry><title type="html">Transformer Study Notes</title><link href="http://localhost:4000/2022/05/12/transformer-study-notes.html" rel="alternate" type="text/html" title="Transformer Study Notes" /><published>2022-05-12T00:00:00+02:00</published><updated>2022-05-12T00:00:00+02:00</updated><id>http://localhost:4000/2022/05/12/transformer-study-notes</id><content type="html" xml:base="http://localhost:4000/2022/05/12/transformer-study-notes.html"><![CDATA[<p>“Attention is all you need.”</p>
+
+<ul>
+  <li><a href="https://arxiv.org/pdf/1706.03762.pdf">Attention Is All You Need</a>.</li>
+  <li><a href="https://www.bilibili.com/video/BV1pu411o7BE">Transformer论文逐段精读</a></li>
+  <li><a href="https://www.youtube.com/watch?v=ugWDIIOHtPA&amp;t=2401s">Transformer, Hung-yi Lee</a></li>
+</ul>
+
+<h3 id="1-introduction">1. Introduction</h3>
+
+<p>Recurrent models：</p>
+
+<ul>
+  <li>factor computation along the symbol positions</li>
+  <li>align the positions to steps in computation time ($h_{t-1}\rightarrow h_t$)</li>
+  <li>preclude parallelization within training examples (sequential computation)</li>
+</ul>
+
+<p>Attention mechanism：</p>
+
+<ul>
+  <li>allow modeling of dependencies without regard to their distance in the input or output sequences</li>
+</ul>
+
+<h3 id="2-background">2. Background</h3>
+
+<p>ConvS2S and ByteNet are difficult to learn dependencies between distant positions and the number of operations grows required to relate signals from two arbitrary input or output positions grows in the distance between positions, linearly and logarithmically respectively.</p>
+
+<p>CNN代替RNN、但使用卷积很难对长的序列进行建模：很多层卷积才能将隔得比较远的位置关联起来。而卷积能一层就把整个序列”看到“。</p>
+
+<p>In the Transformer this is reduced to a constant number of operations. Multi-head attention is used to simulate the multi-channel output of CNN.</p>
+
+<p>但卷积能输出多个通道（不同的特征、模式etc.），所以用多头注意力来模拟。</p>
+
+<h3 id="3-model-architecture">3. Model Architecture</h3>
+
+<p>Self-attention mechanism: 一个输入既作为Key和Value和Query</p>
+
+<p><img src="/pic/transformer.png" style="zoom:50%;" /></p>
+
+<p>Encoder maps an input sequence of symbol representations (x1,…,xn) to a sequence of continuous representations z = (z1,…,zn)</p>
+
+<ul>
+  <li>where $z_t$ is the vector form of $x_t$</li>
+</ul>
+
+<p>Decoder then generates an output sequence (y1, …, ym)</p>
+
+<ul>
+  <li>auto-regressive: 解码器中词是一个一个生成的，且“输入又是输出”
+    <ul>
+      <li>prevent positions from attending to subsequent positions</li>
+      <li>因为在注意力机制中能看到<strong>整个</strong>句子，为了避免t时间能看到t时间以后的输入， 所以采用了masked多头注意力</li>
+      <li>保证训练和预测的行为一致</li>
+    </ul>
+  </li>
+  <li><strong>NB:</strong> m!=n</li>
+</ul>
+
+<p>Layer normalization 对每一个<strong>样本</strong>做normalization，</p>
+
+<ul>
+  <li>全局的均值方差对不定长的句子（比如比训练句更长的测试句）来讲效果不是特别好，所以不用BN</li>
+</ul>
+
+<p><img src="/pic/layer_normalization.png" style="zoom:35%;" /></p>
+
+<p>Scaled Dot-Product Attention</p>
+
+<ul>
+  <li>“scaled”: <a href="https://blog.csdn.net/qq_37430422/article/details/105042303">为什么 dot-product attention 需要被 scaled？</a> “We suspect that for large values of d_k, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients”</li>
+  <li>矩阵乘法利好并行</li>
+</ul>
+
+<p>Mask时为了避免第t时间的时候看到之后时间的东西</p>
+
+<ul>
+  <li>因为注意力机制会看到所有，Q_t 会跟所有K里面的东西做运算</li>
+  <li>算没问题，mask把t时刻即以后的计算得到的值换成非常大的的负数（即softmax输出0）或者权重设置为0</li>
+</ul>
+
+<p><img src="/pic/scaled-dot&amp;multi-head.png" style="zoom:40%;" /></p>
+
+<ul>
+  <li>Linear 投射到低维 ?</li>
+  <li>多头注意力机制 – 识别不一样的模式， 即投影Linear层的w</li>
+</ul>]]></content><author><name>Fengmao Wang</name><email>wangfm2020@gmail.com</email></author><summary type="html"><![CDATA[“Attention is all you need.”]]></summary></entry></feed>
